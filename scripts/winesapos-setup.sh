@@ -81,14 +81,17 @@ broadcom_wifi_auto() {
         else
             ${qdbus_cmd} ${kdialog_dbus} /ProgressDialog showCancelButton false
             ${qdbus_cmd} ${kdialog_dbus} /ProgressDialog org.kde.kdialog.ProgressDialog.close
-	fi
+        fi
     fi
 }
 
 broadcom_wifi_ask() {
-    kdialog --title "winesapOS First-Time Setup" --yesno "Do you want to install the Broadcom proprietary Wi-Fi driver? Try this if Wi-Fi is not working. A reboot is required when done."
+    lspci | grep -i network | grep -i -q broadcom
     if [ $? -eq 0 ]; then
-        broadcom_wifi_auto
+        kdialog --title "winesapOS First-Time Setup" --yesno "Do you want to install the Broadcom proprietary Wi-Fi driver? Try this if Wi-Fi is not working. A reboot is required when done."
+        if [ $? -eq 0 ]; then
+            broadcom_wifi_auto
+        fi
     fi
 }
 
@@ -342,7 +345,7 @@ repo_mirrors_region_ask() {
         # Check if the user selected a mirror region.
         if [ -n "${chosen_region}" ]; then
             # This seems like a better idea than writing global config we cannot reliably remove a line.
-            sudo reflector --verbose --latest 10 --sort age --save /etc/pacman.d/mirrorlist --country "${chosen_region}"
+            sudo reflector --verbose --latest 10 --sort rate --threads 10 --save /etc/pacman.d/mirrorlist --country "${chosen_region}"
             # Ideally we should be sorting by `rate` for consistency but it may get too slow.
         else
             # Fallback to the Arch Linux and Rackspace global mirrors.
@@ -636,7 +639,7 @@ productivity_ask() {
 }
 
 gaming_auto() {
-    kdialog_dbus=$(kdialog --title "winesapOS First-Time Setup" --progressbar "Please wait for recommended gaming applications to be installed..." 12 | cut -d" " -f1)
+    kdialog_dbus=$(kdialog --title "winesapOS First-Time Setup" --progressbar "Please wait for recommended gaming applications to be installed..." 13 | cut -d" " -f1)
     # AntiMicroX for configuring controller input.
     sudo ${CMD_FLATPAK_INSTALL[*]} io.github.antimicrox.antimicrox
     cp /var/lib/flatpak/app/io.github.antimicrox.antimicrox/current/active/export/share/applications/io.github.antimicrox.antimicrox.desktop /home/${USER}/Desktop/
@@ -693,6 +696,9 @@ flatpak run com.github.Matoking.protontricks $@
     # OBS Studio for screen recording and live streaming.
     sudo ${CMD_FLATPAK_INSTALL[*]} com.obsproject.Studio
     cp /var/lib/flatpak/app/com.obsproject.Studio/current/active/export/share/applications/com.obsproject.Studio.desktop /home/${USER}/Desktop/
+    ${qdbus_cmd} ${kdialog_dbus} /ProgressDialog Set org.kde.kdialog.ProgressDialog value 12
+    # umu-launcher.
+    ${CMD_YAY_INSTALL[*]} umu-launcher
     # Xbox Cloud Gaming.
     ln -s /home/${USER}/.winesapos/xcloud.desktop /home/${USER}/Desktop/xcloud.desktop
     ${qdbus_cmd} ${kdialog_dbus} /ProgressDialog org.kde.kdialog.ProgressDialog.close
@@ -721,7 +727,8 @@ gaming_ask() {
                  com.github.Matoking.protontricks:flatpak "Protontricks" off \
                  net.davidotek.pupgui2:flatpak "ProtonUp-Qt" off \
                  steam:other "Steam" off \
-		 xcloud:other "Xbox Cloud Gaming" off \
+                 umu-launcher:pkg "umu-launcher" off \
+                 xcloud:other "Xbox Cloud Gaming" off \
                  zerotier-one:pkg "ZeroTier One VPN (CLI)" off \
                  zerotier-gui-git:pkg "ZeroTier One VPN (GUI)" off)
     for gamepkg in ${gamepkgs}
@@ -741,6 +748,7 @@ gaming_ask() {
             # First install the 'zenity' dependency.
             sudo ${CMD_PACMAN_INSTALL[*]} zenity
             wget "https://github.com/SteamDeckHomebrew/decky-installer/releases/latest/download/decky_installer.desktop" -O /home/${USER}/Desktop/decky_installer.desktop
+            crudini --ini-options=nospace --set /home/${USER}/Desktop/decky_installer.desktop "Desktop Entry" Icon steam
         fi
 
         echo ${gamepkg} | grep -P "^emudeck:other$"
@@ -813,7 +821,7 @@ ge_proton_auto() {
     export answer_install_ge="true"
     # GE-Proton.
     mkdir -p /home/${USER}/.local/share/Steam/compatibilitytools.d/
-    PROTON_GE_VERSION="GE-Proton9-11"
+    PROTON_GE_VERSION="GE-Proton9-16"
     curl https://github.com/GloriousEggroll/proton-ge-custom/releases/download/${PROTON_GE_VERSION}/${PROTON_GE_VERSION}.tar.gz --location --output /home/${USER}/.local/share/Steam/compatibilitytools.d/${PROTON_GE_VERSION}.tar.gz
     ${qdbus_cmd} ${kdialog_dbus} /ProgressDialog Set org.kde.kdialog.ProgressDialog value 1
     tar -x -v -f /home/${USER}/.local/share/Steam/compatibilitytools.d/${PROTON_GE_VERSION}.tar.gz --directory /home/${USER}/.local/share/Steam/compatibilitytools.d/
@@ -1004,6 +1012,7 @@ if [ $? -eq 0 ]; then
     autologin_auto
     grub_hide_auto
     firmware_upgrade_auto
+    locale_ask
 else
     broadcom_wifi_ask
     loop_test_internet_connection
@@ -1018,7 +1027,6 @@ else
     repo_mirrors_region_ask
     graphics_drivers_ask
     swap_method_ask
-    locale_ask
     time_ask
     nix_ask
     productivity_ask
@@ -1033,6 +1041,7 @@ else
     autologin_ask
     grub_hide_ask
     firmware_upgrade_ask
+    locale_ask
 fi
 
 # Fix permissions.

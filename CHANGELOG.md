@@ -14,6 +14,12 @@
 - Change FATX16 and FATX32 support to be installed from a working fork.
 - Add support for hibernation.
 - Add support for the COSMIC desktop environment.
+- Change Decky Loader to have a working icon.
+- Remove secure release images so users can instead create their own custom builds with unique LUKS container encryption keys.
+- Add umu-launcher for running non-Steam games with Proton.
+- Change first-time setup to always ask if the locale should be changed.
+- Add RAM write cache size and time to increase performance.
+- Change GE Proton version from GE-Proton9-11 to GE-Proton9-16.
 
 ## 4.1.0 - The Dual-Boot Update
 

@@ -737,11 +737,17 @@ echo "Minimizing writes to the disk..."
 chroot ${WINESAPOS_INSTALL_DIR} crudini --set /etc/systemd/journald.conf Journal Storage volatile
 echo "Minimizing writes to the disk compelete."
 
-echo "Increasing open file limits..."
+#echo "Increasing open file limits..."
 # This is no longer needed as of filesystem-2024.04.07-1.
 # https://archlinux.org/news/increasing-the-default-vmmax_map_count-value/
 #echo "vm.max_map_count=16777216
 #fs.file-max=524288" >> ${WINESAPOS_INSTALL_DIR}/etc/sysctl.d/00-winesapos.conf
+
+echo "Increasing RAM cache size and time for writes..."
+echo "vm.dirty_background_ratio = 40
+vm.dirty_ratio = 80
+vm.vfs_cache_pressure = 50" >> ${WINESAPOS_INSTALL_DIR}/etc/sysctl.d/50-winesapos-ram-write-cache.conf
+echo "Increasing RAM cache size and time for writes complete."
 
 mkdir -p ${WINESAPOS_INSTALL_DIR}/etc/systemd/system.conf.d/
 echo "[Manager]
@@ -930,6 +936,8 @@ if [[ "${WINESAPOS_INSTALL_GAMING_TOOLS}" == "true" ]]; then
     yay_install_chroot ludusavi
     # Steam dependencies.
     pacman_install_chroot gcc-libs libgpg-error libva libxcb lib32-gcc-libs lib32-libgpg-error lib32-libva lib32-libxcb
+    # umu-launcher.
+    yay_install_chroot umu-launcher
     # ZeroTier VPN.
     pacman_install_chroot zerotier-one
     yay_install_chroot zerotier-gui-git
@@ -947,6 +955,7 @@ if [[ "${WINESAPOS_INSTALL_GAMING_TOOLS}" == "true" ]]; then
     ## First install the 'zenity' dependency.
     pacman_install_chroot zenity
     wget "https://github.com/SteamDeckHomebrew/decky-installer/releases/latest/download/decky_installer.desktop" -O ${WINESAPOS_INSTALL_DIR}/home/${WINESAPOS_USER_NAME}/Desktop/decky_installer.desktop
+    chroot ${WINESAPOS_INSTALL_DIR} crudini --ini-options=nospace --set /home/${WINESAPOS_USER_NAME}/Desktop/decky_installer.desktop "Desktop Entry" Icon steam
     echo "Installing gaming tools complete."
 fi
 

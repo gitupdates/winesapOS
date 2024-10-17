@@ -172,6 +172,7 @@ These are reasons why macOS is inferior compared to Linux when it comes to gamin
     - Wine:
         - [Proton](https://github.com/ValveSoftware/Proton) is installed along with Steam for playing Windows games on Linux.
         - [GE-Proton](https://github.com/GloriousEggroll/proton-ge-custom) is installed along with the ProtonUp-Qt package manager for it. This provides better Windows games compatibility.
+        - [umu-launcher](https://github.com/Open-Wine-Components/umu-launcher) for running non-Steam games with Proton.
     - [GameMode](https://github.com/FeralInteractive/gamemode) is available to be used to speed up games.
     - [Gamescope](https://github.com/Plagman/gamescope) for helping play older games with frame rate or resolution issues.
     - [MangoHud](https://github.com/flightlessmango/MangoHud) for benchmarking OpenGL and Vulkan games.
@@ -194,7 +195,10 @@ These are reasons why macOS is inferior compared to Linux when it comes to gamin
     - Root file system is mounted with the options `noatime` and `nodiratime` to not write the access times for files and directories.
     - Temporary directories with heavy writes (`/tmp/`, `/var/log/`, and `/var/tmp/`) are mounted as RAM-only file systems.
     - [systemd-journald](https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html) is configured to use volatile (RAM-only) storage for all system logs.
-    - Swappiness level is set to 0.5% (down from the default of 30%) as recommended by CryoByte33's [CryoUtilities](https://github.com/CryoByte33/steam-deck-utilities).
+    - zram with lz4 compression is used for swap to maximize performance and avoid writing data to a swap file on the storage device.
+        - Alternatively, a swap file can be used instead for hibernation support.
+        - For a swap file, the swappiness level is set to 0.5% (down from the default of 30%) as recommended by CryoByte33's [CryoUtilities](https://github.com/CryoByte33/steam-deck-utilities).
+    - Writes are heavily cached in RAM for faster performance.
 - **Full backups** via Btrfs.
     - [Snapper](https://github.com/openSUSE/snapper) takes 6 monthly snapshots of the `/home/` directory.
     - [snap-pac](https://github.com/wesbarnett/snap-pac) takes a snapshot whenever the `pacman` package manager is used.
@@ -460,7 +464,7 @@ Minimum:
 - Graphics = AMD, Intel, or NVIDIA, Parallels Desktop, VirtualBox, or VMware Fusion/Workstation virtual graphics device.
 - Storage
     - Minimal image = 16 GB USB 3.2 Gen 1 (USB 3.0) flash drive.
-    - Performance and secure image = 64 GB USB 3.2 Gen 1 (USB 3.0) flash drive.
+    - Performance image = 64 GB USB 3.2 Gen 1 (USB 3.0) flash drive.
 
 Recommended:
 
@@ -482,6 +486,7 @@ winesapOS provides 3 different image types to meet the diverse needs of our user
 - **Minimal** = A small variant of the performance image.
 - **Performance** =  Everything but the kitchen sink, speed, and ease-of-use.
 - **Secure** = Locked down and recommended for advanced Linux users only.
+    - There are no release builds for the secure image. Use a [custom build](#custom-builds) to generate a unique LUKS container encryption key.
 
 | Feature | Minimal | Performance | Secure |
 | ------- | ------- | ----------- | ------ |
@@ -490,6 +495,7 @@ winesapOS provides 3 different image types to meet the diverse needs of our user
 | Firewall | No | No | Yes (Firewalld) |
 | `root` Password Requires Reset | No | No | Yes |
 | 16 GiB exFAT Cross-Platform Storage | No | Yes | Yes |
+| Pre-built release image | Yes | Yes | No |
 
 The minimal root file system archive (`winesapos-${WINESAPOS_VERSION}-minimal-rootfs.tar.zst`) is the extracted files from the minimal image. It can be used for containers or installing winesapOS in a [Docker or Podman container](#docker-or-podman-container), [dual-boot](#dual-boot), or [WSL 2](#windows-subsystem-for-linux) scenario.
 
@@ -522,7 +528,6 @@ $ sudo passwd root
         - Download one the of the release images and then continue on with this guide.
             - Performance (recommended) = Requires 31 GiB of free space to download and extract.
             - Minimal (for users low on storage space or who want control over what is installed) = Requires 13 GiB of free space to download and extract.
-            - Secure (for advanced users only) = Requires 32 GiB of free space to download and extract.
     - Internal drive
         - Entire drive (PCs only, does not work on Macs)
             - Use winesapOS to install winesapOS. Start with the minimal image and follow through the next steps (2 and 3) to extract and flash the image to an external drive. Then boot into the storage device and download the image you want to setup. Follow steps 2 and 3 again to flash the image onto an internal storage device.
@@ -627,13 +632,23 @@ Instead of using a release build which is already made, advanced users may want 
     export WINESAPOS_DEVICE=<DEVICE>
     ```
 
-6.  Run the build.
+6.  By default, the performance image will be built. Alternatively, source the environment variables to configure the build to make the minimal or secure image instead.
+
+    ```
+    . ./env/winesapos-env-minimal.sh
+    ```
+
+    ```
+    . ./env/winesapos-env-secure.sh
+    ```
+
+7.  Run the build.
 
     ```
     sudo -E bash ./winesapos-install.sh
     ```
 
-7.  Check for any test failures (there should be no output from this command).
+8.  Check for any test failures (there should be no output from this command).
 
     ```
     grep -P 'FAIL$' /winesapos/etc/winesapos/winesapos-install.log
@@ -752,7 +767,7 @@ It is recommended to follow the [getting started](#getting-started) guide to ins
 
 However, it is possible to install winesapOS onto the same drive as Linux or Windows. That is what this guide will cover in more detail.
 
-Only UEFI is supported for dual-boot installations of winesapOS. For legacy BIOS boot, [create and flash](#getting-started) a normal portable [release](https://github.com/winesapOS/winesapOS/releases) image such as the minimal, performance, or secure. Those all support both legacy BIOS boot and UEFI.
+Only UEFI is supported for dual-boot installations of winesapOS. For legacy BIOS boot, [create and flash](#getting-started) a normal portable [release](https://github.com/winesapOS/winesapOS/releases) image such as the minimal or performance. Those all support both legacy BIOS boot and UEFI.
 
 Install (if necessary) macOS or Windows first. Then proceed with installing winesapOS onto the same drive.
 
@@ -888,7 +903,6 @@ After logging in for the first time as the `winesap` user, the first-time setup 
 | Select your desired mirror region | Automatic (GeoIP) |
 | Graphics driver | Mesa |
 | Swap method | zram |
-| Locale | en_US.UTF-8 UTF-8 |
 | Time zone | Automatic (GeoIP) |
 | Nix package manager | Yes |
 | Recommended producitvity apps | Yes |
@@ -902,6 +916,7 @@ After logging in for the first time as the `winesap` user, the first-time setup 
 | Enable autologin | Yes (minimal and performance) and No (secure) |
 | Hide GRUB boot menu | Yes |
 | Upgrade firmware | Yes |
+| Locale | Ask |
 
 ### Upgrades
 
@@ -1105,7 +1120,7 @@ A VPN is required for LAN gaming online. Use the free and open source ZeroTier V
         C:\Windows\system32>CertUtil.exe -hashfile C:\Users\<USER>\Downloads\winesapos-<VERSION>-<TYPE>.sha512sum.txt SHA512
         ```
 
-2. **Not enough free space.** Ensure you have 13 GiB (minimal image), 31 GiB (performance image), or 33 GiB (secure image) of free space before downloading the zip files.
+2. **Not enough free space.** Ensure you have 13 GiB (minimal image) or 31 GiB (performance image) of free space before downloading the zip files.
 3. **If using PeaZip, it sometimes fails to extract to the current directory.** Try extracting to a different directory.
 
 ### winesapOS Not Booting
@@ -1325,6 +1340,7 @@ https://twitter.com/LukeShortCloud/status/1659279345926516737
 
 | Release Version/Tag | Project Name | Operating System | Desktop Environment | Release Images |
 | ------------------- | ------------ | ---------------- | ------------------- | -------------- |
+| 4.2.0 | winesapOS | Arch Linux | KDE Plasma | Performance, Minimal, and Minimal Root File System |
 | 4.1.0 | winesapOS | Arch Linux | KDE Plasma | Performance, Secure, Minimal, and Minimal Root File System |
 | 4.0.0 | winesapOS | Arch Linux | KDE Plasma | Performance, Secure, and Minimal |
 | 3.2.0 | winesapOS | SteamOS 3 | KDE Plasma | Performance, Secure, and Minimal |
