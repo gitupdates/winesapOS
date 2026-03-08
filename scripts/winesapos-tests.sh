@@ -341,6 +341,13 @@ if [[ "${WINESAPOS_BUILD_CHROOT_ONLY}" == "false" ]]; then
         pacman_search_loop linux-fsync-nobara-bin linux618 linux618-headers linux-firmware linux-firmware-broadcom mkinitcpio-firmware amd-ucode intel-ucode apple-bcm-firmware
     elif [[ "${WINESAPOS_DISTRO}" == "arch" ]]; then
         pacman_search_loop linux-fsync-nobara-bin linux-lts linux-lts-headers linux-firmware linux-firmware-broadcom mkinitcpio-firmware amd-ucode intel-ucode apple-bcm-firmware
+
+        printf "\tChecking that Linux LTS on Arch Linux is the expected version..."
+        if chroot "${WINESAPOS_INSTALL_DIR}" pacman -Q linux-lts | grep -q "6\.18"; then
+            echo PASS
+        else
+            winesapos_test_failure
+        fi
     fi
 fi
 
