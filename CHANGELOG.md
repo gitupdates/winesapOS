@@ -3,6 +3,7 @@
 ## 4.6.0 - The Playtron Update
 
 - Remove the abandoned Steam Tinker Launch program.
+- Change Linux LTS to be based on Linux 6.18.
 
 ## 4.5.0 - The Ventoy Resize Update
 

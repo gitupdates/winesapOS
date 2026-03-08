@@ -8,7 +8,7 @@
 
 **No Action Required:**
 
-- None.
+- Change Linux LTS to be based on Linux 6.18.
 
 ## 4.4.0 to 4.5.0
 
