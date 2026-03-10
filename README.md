@@ -175,7 +175,7 @@ Want to help support our work? Report any bugs or feature requests to our [GitHu
     - [ckb-next](https://github.com/ckb-next/ckb-next) for supporting RGB on Corsair keyboards and mice.
     - [DOSBox](https://www.dosbox.com/) for running 16-bit DOS and Windows (via Wine) applications.
     - [GameMode](https://github.com/FeralInteractive/gamemode) is available to be used to speed up games.
-    - [Gamescope](https://github.com/Plagman/gamescope) for helping play older games with frame rate or resolution issues.
+    - [Gamescope](https://github.com/OpenGamingCollective/gamescope) from the Open Gaming Collective (OGC) for helping play older games with frame rate or resolution issues.
     - [GOverlay](https://github.com/benjamimgois/goverlay) is a GUI for managing Vulkan overlays including MangoHud and vkBasalt.
     - [LACT](https://github.com/ilya-zlobintsev/LACT) for overclocking and/or undervolting the GPU.
     - [Ludusavi](https://github.com/mtkennerly/ludusavi) is a game save files manager.

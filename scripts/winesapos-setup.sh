@@ -942,8 +942,14 @@ flatpak run com.github.Matoking.protontricks $@
     flatpak_install com.obsproject.Studio
     cp /var/lib/flatpak/app/com.obsproject.Studio/current/active/export/share/applications/com.obsproject.Studio.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 24
-    # Open Gamepad UI.
-    aur_install opengamepadui-bin opengamepadui-session-git
+    # Steam.
+    pacman_install steam
+    cp /usr/share/applications/steam.desktop /home/"${USER}"/Desktop/
+    steam_bootstrap
+    # 'gamescope-ogc' needs to be installed first before 'gamescope-session-steam-git' and 'opengamepadui-session-git'.
+    # Otherwise, the 'gamescope' package gets installed in as a dependency.
+    aur_install gamescope-ogc
+    aur_install gamescope-session-git gamescope-session-steam-git
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 25
     # RemotePlayWhatever.
     aur_install remoteplaywhatever
@@ -951,11 +957,8 @@ flatpak run com.github.Matoking.protontricks $@
     flatpak_install net.retrodeck.retrodeck
     cp /var/lib/flatpak/app/net.retrodeck.retrodeck/current/active/export/share/applications/net.retrodeck.retrodeck.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 26
-    # Steam.
-    pacman_install steam
-    cp /usr/share/applications/steam.desktop /home/"${USER}"/Desktop/
-    steam_bootstrap
-    aur_install gamescope-session-git gamescope-session-steam-git
+    # Open Gamepad UI.
+    aur_install opengamepadui-bin opengamepadui-session-git
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 27
     # umu-launcher.
     aur_install umu-launcher
@@ -1039,8 +1042,7 @@ gaming_ask() {
         fi
 
         if echo "${gamepkg}" | grep -P "^gamescope:other$"; then
-            pacman_install gamescope
-            aur_install gamescope-session-git gamescope-session-steam-git
+            aur_install gamescope-ogc gamescope-session-git gamescope-session-steam-git
         fi
 
         if echo "${gamepkg}" | grep -P "^mangohud-git:other$"; then

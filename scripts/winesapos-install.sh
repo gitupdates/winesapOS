@@ -965,11 +965,13 @@ if [[ "${WINESAPOS_INSTALL_GAMING_TOOLS}" == "true" ]]; then
     pacman_install_chroot ckb-next
     # GameMode.
     pacman_install_chroot gamemode lib32-gamemode
+    # 'gamescope-ogc' needs to be installed first before 'gamescope-session-steam-git' and 'opengamepadui-session-git'.
+    # Otherwise, the 'gamescope' package gets installed in as a dependency.
+    aur_install_chroot gamescope-ogc
     # Open Gamepad UI.
     aur_install_chroot opengamepadui-bin
     # Gamescope and Gamescope Session.
-    pacman_install_chroot gamescope
-    aur_install_chroot gamescope-session-git gamescope-session-steam-git opengamepadui-session-git
+    aur_install_chroot gamescope-ogc gamescope-session-git gamescope-session-steam-git opengamepadui-session-git
     # Nexus Mods app.
     aur_install_chroot nexusmods-app-bin
     # OpenRazer.
