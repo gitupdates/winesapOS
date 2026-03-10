@@ -153,7 +153,7 @@ Include = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
       zerotier-gui-git \
       zfs-dkms \
       zfs-utils; then
-        echo "Failed to install all Flatpaks during the winesapOS conversion."
+        echo "Failed to install all AUR packages."
         exit 1
     else
         echo "Installing all AUR packages complete."
