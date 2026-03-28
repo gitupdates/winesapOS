@@ -2,8 +2,14 @@
 
 # Enable shell debugging.
 set -x
+
+# Start logging to a file.
 START_TIME=$(date --iso-8601=seconds)
-exec > >(tee "/tmp/upgrade_${START_TIME}.log") 2>&1
+if [[ "${WINESAPOS_USER_NAME}" == "stick" ]]; then
+    exec > >(tee "/etc/mac-linux-gaming-stick/upgrade_${START_TIME}.log") 2>&1
+else
+    exec > >(tee "/etc/winesapos/upgrade_${START_TIME}.log") 2>&1
+fi
 echo "Start time: ${START_TIME}"
 
 WINESAPOS_UPGRADE_FILES="${WINESAPOS_UPGRADE_FILES:-true}"
@@ -1433,11 +1439,5 @@ else
 fi
 
 echo "End time: $(date --iso-8601=seconds)"
-
-if [[ "${WINESAPOS_USER_NAME}" == "stick" ]]; then
-    mv "/tmp/upgrade_${START_TIME}.log" /etc/mac-linux-gaming-stick/
-else
-    mv "/tmp/upgrade_${START_TIME}.log" /etc/winesapos/
-fi
 
 exit "${failed_tests}"
