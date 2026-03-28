@@ -1187,7 +1187,7 @@ if [[ -f /etc/modules-load.d/winesapos-controllers.conf ]]; then
 fi
 sudo -E -u "${WINESAPOS_USER_NAME}" "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 3
 
-if ${CMD_PACMAN} -Q | grep -q "coolercontrol 2"; then
+if ${CMD_PACMAN} -Q | grep -q -P "coolercontrol (1|2)"; then
     "${CMD_PACMAN_REMOVE[@]}" coolercontrol
     "${CMD_PACMAN_REMOVE[@]}" coolercontrol-liqctld
     "${CMD_PACMAN_INSTALL[@]}" coolercontrol
