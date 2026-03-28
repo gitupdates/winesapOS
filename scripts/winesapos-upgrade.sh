@@ -1201,6 +1201,17 @@ fi
 sudo -E -u "${WINESAPOS_USER_NAME}" "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog org.kde.kdialog.ProgressDialog.close
 echo "Running 4.4.0 to 4.5.0 upgrades complete."
 
+
+kdialog_dbus=$(sudo -E -u "${WINESAPOS_USER_NAME}" kdialog --title "winesapOS Upgrade" --progressbar "Running 4.5.0 to 4.6.0 upgrades..." 1 | cut -d" " -f1)
+sudo -E -u "${WINESAPOS_USER_NAME}" "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog showCancelButton false
+
+if ${CMD_PACMAN} -Q kdsoap-qt5; then
+    ${CMD_PACMAN} -R -n --nodeps --nodeps --noconfirm kdsoap-qt5
+fi
+
+sudo -E -u "${WINESAPOS_USER_NAME}" "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog org.kde.kdialog.ProgressDialog.close
+echo "Running 4.5.0 to 4.6.0 upgrades complete."
+
 echo "Upgrading system packages..."
 kdialog_dbus=$(sudo -E -u "${WINESAPOS_USER_NAME}" kdialog --title "winesapOS Upgrade" --progressbar "Please wait for all system packages to upgrade (this can take a long time)..." 11 | cut -d" " -f1)
 sudo -E -u "${WINESAPOS_USER_NAME}" "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog showCancelButton false
