@@ -3,25 +3,7 @@
 # Enable shell debugging.
 set -x
 
-# Start logging to a file.
 START_TIME=$(date --iso-8601=seconds)
-if [[ "${WINESAPOS_USER_NAME}" == "stick" ]]; then
-    exec > >(tee "/etc/mac-linux-gaming-stick/upgrade_${START_TIME}.log") 2>&1
-else
-    exec > >(tee "/etc/winesapos/upgrade_${START_TIME}.log") 2>&1
-fi
-echo "Start time: ${START_TIME}"
-
-WINESAPOS_UPGRADE_FILES="${WINESAPOS_UPGRADE_FILES:-true}"
-WINESAPOS_UPGRADE_REPO_ROLLING="${WINESAPOS_UPGRADE_REPO_ROLLING:-true}"
-WINESAPOS_UPGRADE_VERSION_CHECK="${WINESAPOS_UPGRADE_VERSION_CHECK:-false}"
-
-failed_tests=0
-winesapos_upgrade_failure() {
-    # shellcheck disable=SC2003 disable=SC2086
-    failed_tests=$(expr ${failed_tests} + 1)
-    echo FAIL
-}
 
 # Check for a custom user name. Default to 'winesap'.
 if [[ -z "${WINESAPOS_USER_NAME}" ]]; then
@@ -42,6 +24,25 @@ if ! ls /var/winesapos &> /dev/null; then
     fi
     ln -s /etc/winesapos /var/winesapos
 fi
+
+# Start logging to a file.
+if [[ "${WINESAPOS_USER_NAME}" == "stick" ]]; then
+    exec > >(tee "/etc/mac-linux-gaming-stick/upgrade_${START_TIME}.log") 2>&1
+else
+    exec > >(tee "/etc/winesapos/upgrade_${START_TIME}.log") 2>&1
+fi
+echo "Start time: ${START_TIME}"
+
+WINESAPOS_UPGRADE_FILES="${WINESAPOS_UPGRADE_FILES:-true}"
+WINESAPOS_UPGRADE_REPO_ROLLING="${WINESAPOS_UPGRADE_REPO_ROLLING:-true}"
+WINESAPOS_UPGRADE_VERSION_CHECK="${WINESAPOS_UPGRADE_VERSION_CHECK:-false}"
+
+failed_tests=0
+winesapos_upgrade_failure() {
+    # shellcheck disable=SC2003 disable=SC2086
+    failed_tests=$(expr ${failed_tests} + 1)
+    echo FAIL
+}
 
 crudini_wrapper() {
     if "${CMD_CRUDINI}" --version; then
