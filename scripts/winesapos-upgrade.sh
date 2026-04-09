@@ -704,7 +704,7 @@ echo "Switching Steam back to the 'stable' update channel complete."
 echo "Running 3.2.0 to 3.2.1 upgrades complete."
 
 echo "Running 3.2.1 to 3.3.0 upgrades..."
-kdialog_dbus=$(sudo -E -u "${WINESAPOS_USER_NAME}" kdialog --title "winesapOS Upgrade" --progressbar "Running 3.2.1 to 3.3.0 upgrades..." 12 | cut -d" " -f1)
+kdialog_dbus=$(sudo -E -u "${WINESAPOS_USER_NAME}" kdialog --title "winesapOS Upgrade" --progressbar "Running 3.2.1 to 3.3.0 upgrades..." 11 | cut -d" " -f1)
 sudo -E -u "${WINESAPOS_USER_NAME}" "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog showCancelButton false
 echo "Setting up default text editor..."
 if grep -q "EDITOR=nano" /etc/environment; then
@@ -822,22 +822,12 @@ if ! ${CMD_PACMAN} -Q | grep mtools; then
 fi
 sudo -E -u "${WINESAPOS_USER_NAME}" "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 10
 
-if ! ${CMD_PACMAN} -Q | grep reiserfsprogs; then
-    echo "Adding support for the ReiserFS file system..."
-    # 'cmake' is required to build 'reiserfs-defrag' but is not installed with 'base-devel'.
-    "${CMD_PACMAN_INSTALL[@]}" cmake
-    "${CMD_AUR_INSTALL[@]}" reiserfsprogs reiserfs-defrag
-    echo "Adding support for the ReiserFS file system done."
-fi
-sudo -E -u "${WINESAPOS_USER_NAME}" "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 11
-
 if ! ${CMD_PACMAN} -Q mangohud-common; then
     echo "Updating MangoHud to the new package names..."
     ${CMD_PACMAN} -R -n --nodeps --nodeps --noconfirm mangohud-common mangohud lib32-mangohud
     "${CMD_PACMAN_INSTALL[@]}" mangohud lib32-mangohud
     echo "Updating MangoHud to the new package names complete."
 fi
-
 sudo -E -u "${WINESAPOS_USER_NAME}" "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog org.kde.kdialog.ProgressDialog.close
 echo "Running 3.2.1 to 3.3.0 upgrades complete."
 

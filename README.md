@@ -242,7 +242,7 @@ Want to help support our work? Report any bugs or feature requests to our [GitHu
     - NTFS
     - OverlayFS
     - pifs (πfs)
-    - ReiserFS = Only works with Linux LTS.
+    - ReiserFS = Use [winesapOS 4.5.0](https://github.com/winesapOS/winesapOS/releases/tag/4.5.0).
     - SquashFS
     - s3fs
     - SSDFS

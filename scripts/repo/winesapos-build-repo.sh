@@ -155,7 +155,6 @@ makepkg_fn minio
 makepkg_fn nexusmods-app-bin
 makepkg_fn oxp-sensors-dkms-git
 makepkg_fn pifs-aya-git
-makepkg_fn reiserfsprogs
 makepkg_fn ssdfs-tools
 
 # 'snapd' is a runtime dependency of 'bauh'

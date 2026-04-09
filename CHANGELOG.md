@@ -5,6 +5,7 @@
 - Remove the abandoned Steam Tinker Launch program.
 - Change Linux LTS to be based on Linux 6.18.
 - Change 'gamescope' package to be the 'gamescope-ogc' package instead.
+- Remove ReiserFS since it is no longer available in the latest Linux LTS.
 
 ## 4.5.0 - The Ventoy Resize Update
 

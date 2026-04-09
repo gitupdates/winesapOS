@@ -140,7 +140,6 @@ Include = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
       python-iniparse-git \
       qdirstat \
       rar \
-      reiserfsprogs \
       remoteplaywhatever \
       snapd \
       ssdfs-tools \
