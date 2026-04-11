@@ -7,6 +7,7 @@
 - Change 'gamescope' package to be the 'gamescope-ogc' package instead.
 - Remove ReiserFS since it is no longer available in the latest Linux LTS.
 - Change USB driver to no longer autosuspend.
+- Add the default user to the 'wheel' group for more administrator control.
 
 ## 4.5.0 - The Ventoy Resize Update
 

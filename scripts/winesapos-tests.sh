@@ -515,6 +515,13 @@ elif [[ "${WINESAPOS_DE}" == "sway" ]]; then
     pacman_search sway
 fi
 
+printf "\tChecking that the user is part of the 'wheel' group..."
+if grep wheel: "${WINESAPOS_INSTALL_DIR}"/etc/group | grep -q "${WINESAPOS_USER_NAME}"; then
+    echo PASS
+else
+    winesapos_test_failure
+fi
+
 printf "\tChecking that SDDM will hide Nix build users..."
 if [[ "$(chroot "${WINESAPOS_INSTALL_DIR}" crudini --get /etc/sddm.conf.d/uid.conf Users MaximumUid)" == "2999" ]]; then
     echo PASS

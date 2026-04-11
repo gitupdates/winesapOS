@@ -924,6 +924,9 @@ elif [[ "${WINESAPOS_DE}" == "plasma-mobile" ]]; then
     echo "Installing the KDE Plasma Mobile desktop environment complete."
 fi
 
+# Add the user to the 'wheel' group.
+chroot "${WINESAPOS_INSTALL_DIR}" groupadd wheel
+chroot "${WINESAPOS_INSTALL_DIR}" usermod -a -G wheel "${WINESAPOS_USER_NAME}"
 # Start SDDM. This will provide an option of which desktop environment to load.
 chroot "${WINESAPOS_INSTALL_DIR}" systemctl enable sddm
 # Install Bluetooth.
