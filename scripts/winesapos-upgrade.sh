@@ -1406,6 +1406,14 @@ sudo -E -u "${WINESAPOS_USER_NAME}" "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDi
 
 echo "Updating Btrfs snapshots in the GRUB menu..."
 grub-mkconfig -o /boot/grub/grub.cfg
+if [ -f /usr/share/libalpm/hooks/winesapos-etc-grub.d-10_linux.hook ]; then
+    if ! grep -q "search --no-floppy --label winesapos-root --set root" /boot/grub/grub.cfg; then
+        winesapos_upgrade_failure
+    fi
+    if ! grep -q "root=LABEL=winesapos-root" /boot/grub/grub.cfg; then
+        winesapos_upgrade_failure
+    fi
+fi
 echo "Updating Btrfs snapshots in the GRUB menu complete."
 
 # Allow PackageKit (required for Discover) to work again.
