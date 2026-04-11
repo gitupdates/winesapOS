@@ -894,7 +894,7 @@ for i in \
   "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/gparted.desktop \
   "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/terminator.desktop
     do printf "\t\tChecking if the file %s exists..." "${i}"
-    if [ -f "${i}" ]; then
+    if [[ -e "${i}" || -L "${i}" ]]; then
       echo PASS
     else
       winesapos_test_failure
@@ -914,7 +914,7 @@ if [[ "${WINESAPOS_INSTALL_GAMING_TOOLS}" == "true" ]]; then
       "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/steam.desktop \
       "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/zerotier-gui.desktop
         do printf "\t\tChecking if the file %s exists..." "${i}"
-        if [ -f "${i}" ]; then
+        if [[ -e "${i}" || -L "${i}" ]]; then
           echo PASS
         else
           winesapos_test_failure
@@ -932,7 +932,7 @@ if [[ "${WINESAPOS_INSTALL_PRODUCTIVITY_TOOLS}" == "true" ]]; then
       "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/org.kde.spectacle.desktop \
       "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/veracrypt.desktop
         do printf "\t\tChecking if the file %s exists..." "${i}"
-        if [ -f "${i}" ]; then
+        if [[ -e "${i}" || -L "${i}" ]]; then
           echo PASS
         else
           winesapos_test_failure
@@ -943,7 +943,7 @@ fi
 if [[ "${WINESAPOS_FIREWALL}" == "true" ]]; then
     i="${WINESAPOS_INSTALL_DIR}/home/${WINESAPOS_USER_NAME}/Desktop/firewall-config.desktop"
     printf "\t\tChecking if the file %s exists..." "${i}"
-    if [ -f "${i}" ]; then
+    if [[ -e "${i}" || -L "${i}" ]]; then
         echo PASS
     else
         winesapos_test_failure
@@ -960,7 +960,7 @@ fi
 
 for y in "${x[@]}";
     do printf "\t\tChecking if the file %s exists..." "${y}"
-    if [ -f "${y}" ]; then
+    if [[ -e "${y}" || -L "${y}" ]]; then
         echo PASS
     else
         winesapos_test_failure

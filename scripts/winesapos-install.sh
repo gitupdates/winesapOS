@@ -865,7 +865,7 @@ elif [[ "${WINESAPOS_DE}" == "plasma" ]]; then
     fi
 
     # Spectacle.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/org.kde.spectacle.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/org.kde.spectacle.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
 
     if [[ "${WINESAPOS_DISABLE_KWALLET}" == "true" ]]; then
         mkdir -p "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/.config/
@@ -1020,23 +1020,23 @@ if [[ "${WINESAPOS_INSTALL_GAMING_TOOLS}" == "true" ]]; then
 fi
 
 echo "Setting up desktop shortcuts..."
-cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/appimagepool.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
-cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/bauh.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
-cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/blueman-manager.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+ln -s /usr/share/applications/appimagepool.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+ln -s /usr/share/applications/bauh.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+ln -s /usr/share/applications/blueman-manager.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
 cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/firefox-esr.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
 sed -i 's/Exec=/Exec=\/usr\/bin\/eatmydata\ /g' "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/firefox-esr.desktop
-cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/gparted.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
-cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/terminator.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+ln -s /usr/share/applications/gparted.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+ln -s /usr/share/applications/terminator.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
 
 if [[ "${WINESAPOS_DE}" == "cinnamon" ]]; then
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/nemo.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/org.kde.pix.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/nemo.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/org.kde.pix.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
 elif [[ "${WINESAPOS_DE}" == "gnome" ]]; then
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/org.gnome.eog.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/org.gnome.Nautilus.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/org.gnome.eog.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/org.gnome.Nautilus.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
 elif [[ "${WINESAPOS_DE}" == "plasma" ]]; then
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/org.kde.dolphin.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/org.kde.gwenview.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/org.kde.dolphin.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/org.kde.gwenview.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
 fi
 
 mkdir -p "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/.winesapos/
@@ -1045,39 +1045,38 @@ cp ../rootfs/home/winesap/.winesapos/winesapos-xcloud.desktop "${WINESAPOS_INSTA
 
 if [[ "${WINESAPOS_INSTALL_GAMING_TOOLS}" == "true" ]]; then
     # ckb-next.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/ckb-next.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/ckb-next.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
     # GOverlay.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/io.github.benjamimgois.goverlay.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/io.github.benjamimgois.goverlay.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
     # Ludusavi.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/com.mtkennerly.ludusavi.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/com.mtkennerly.ludusavi.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
     # Nexus Mods app.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/com.nexusmods.app.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/com.nexusmods.app.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
     # Oversteer.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/io.github.berarma.Oversteer.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/io.github.berarma.Oversteer.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
     # Polychromatic.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/polychromatic.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/polychromatic.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
     # Steam.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/steam.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/steam.desktop
-    chmod +x "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/steam.desktop
+    ln -s /usr/share/applications/steam.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
     # ZeroTier GUI.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/zerotier-gui.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/zerotier-gui.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
 fi
 
 if [[ "${WINESAPOS_INSTALL_PRODUCTIVITY_TOOLS}" == "true" ]]; then
     # ClamTk (ClamAV GUI).
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/clamtk.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/clamtk.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
     # CoolerControl.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/org.coolercontrol.CoolerControl.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/org.coolercontrol.CoolerControl.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
     # QDirStat.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/qdirstat.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/qdirstat.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
     # mpv.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/mpv.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/mpv.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
     # VeraCrypt.
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/veracrypt.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/veracrypt.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
 fi
 
 if [[ "${WINESAPOS_FIREWALL}" == "true" ]]; then
-    cp "${WINESAPOS_INSTALL_DIR}"/usr/share/applications/firewall-config.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
+    ln -s /usr/share/applications/firewall-config.desktop "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/
 fi
 
 # Fix permissions on the desktop shortcuts.

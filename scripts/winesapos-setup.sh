@@ -713,32 +713,32 @@ productivity_auto() {
     kdialog_dbus=$(kdialog --title "winesapOS First-Time Setup" --progressbar "Please wait for recommended productivity applications to be installed..." 19 | cut -d" " -f1)
     # Calibre for an ebook manager.
     flatpak_install com.calibre_ebook.calibre
-    cp /var/lib/flatpak/app/com.calibre_ebook.calibre/current/active/export/share/applications/com.calibre_ebook.calibre.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/com.calibre_ebook.calibre/current/active/export/share/applications/com.calibre_ebook.calibre.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 1
     # GNOME Camera/Snapshot for a webcam utility.
     flatpak_install org.gnome.Snapshot
-    cp /var/lib/flatpak/app/org.gnome.Snapshot/current/active/export/share/applications/org.gnome.Snapshot.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/org.gnome.Snapshot/current/active/export/share/applications/org.gnome.Snapshot.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 2
     # ClamAV / ClamTk anti-virus.
     pacman_install clamav clamtk
     sudo freshclam
-    cp /usr/share/applications/clamtk.desktop /home/"${USER}"/Desktop/
+    ln -s /usr/share/applications/clamtk.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 3
     # CoolerControl for computer fan management.
     aur_install coolercontrol
-    cp /usr/share/applications/org.coolercontrol.CoolerControl.desktop /home/"${USER}"/Desktop/
+    ln -s /usr/share/applications/org.coolercontrol.CoolerControl.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 4
     # FileZilla for FTP file transfers.
     flatpak_install org.filezillaproject.Filezilla
-    cp /var/lib/flatpak/exports/share/applications/org.filezillaproject.Filezilla.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/exports/share/applications/org.filezillaproject.Filezilla.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 5
     # Flatseal for managing Flatpaks.
     flatpak_install com.github.tchx84.Flatseal
-    cp /var/lib/flatpak/app/com.github.tchx84.Flatseal/current/active/export/share/applications/com.github.tchx84.Flatseal.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/com.github.tchx84.Flatseal/current/active/export/share/applications/com.github.tchx84.Flatseal.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 6
     # GIMP photo editor.
     flatpak_install org.gimp.GIMP
-    cp /var/lib/flatpak/app/org.gimp.GIMP/current/active/export/share/applications/org.gimp.GIMP.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/org.gimp.GIMP/current/active/export/share/applications/org.gimp.GIMP.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 7
     # Google Chrome web browser.
     chrome_install
@@ -749,42 +749,42 @@ productivity_auto() {
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 9
     # Kalk for a calculator.
     flatpak_install org.kde.kalk
-    cp /var/lib/flatpak/app/org.kde.kalk/current/active/export/share/applications/org.kde.kalk.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/org.kde.kalk/current/active/export/share/applications/org.kde.kalk.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 10
     # KeePassXC for an encrypted password manager.
     flatpak_install org.keepassxc.KeePassXC
-    cp /var/lib/flatpak/app/org.keepassxc.KeePassXC/current/active/export/share/applications/org.keepassxc.KeePassXC.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/org.keepassxc.KeePassXC/current/active/export/share/applications/org.keepassxc.KeePassXC.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 11
     # LibreOffice for an office suite.
     flatpak_install org.libreoffice.LibreOffice
-    cp /var/lib/flatpak/app/org.libreoffice.LibreOffice/current/active/export/share/applications/org.libreoffice.LibreOffice.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/org.libreoffice.LibreOffice/current/active/export/share/applications/org.libreoffice.LibreOffice.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 12
     # mpv for HDR video playback.
     pacman_install mpv
-    cp /usr/share/applications/mpv.desktop /home/"${USER}"/Desktop/
+    ln -s /usr/share/applications/mpv.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 13
     # Nix package manager.
     nix_install
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 14
     # PeaZip compression utility.
     flatpak_install io.github.peazip.PeaZip
-    cp /var/lib/flatpak/app/io.github.peazip.PeaZip/current/active/export/share/applications/io.github.peazip.PeaZip.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/io.github.peazip.PeaZip/current/active/export/share/applications/io.github.peazip.PeaZip.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 15
     # qBittorrent for torrents.
     flatpak_install org.qbittorrent.qBittorrent
-    cp /var/lib/flatpak/app/org.qbittorrent.qBittorrent/current/active/export/share/applications/org.qbittorrent.qBittorrent.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/org.qbittorrent.qBittorrent/current/active/export/share/applications/org.qbittorrent.qBittorrent.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 16
     # QDirStat for managing storage space.
     aur_install qdirstat
-    cp /usr/share/applications/qdirstat.desktop /home/"${USER}"/Desktop/
+    ln -s /usr/share/applications/qdirstat.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 17
     # VeraCrypt for managing encrypted storage.
     pacman_install veracrypt
-    cp /usr/share/applications/veracrypt.desktop /home/"${USER}"/Desktop/
+    ln -s /usr/share/applications/veracrypt.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 18
     # VLC media player.
     flatpak_install org.videolan.VLC
-    cp /var/lib/flatpak/app/org.videolan.VLC/current/active/export/share/applications/org.videolan.VLC.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/org.videolan.VLC/current/active/export/share/applications/org.videolan.VLC.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog org.kde.kdialog.ProgressDialog.close
 }
 
@@ -837,26 +837,26 @@ gaming_auto() {
     kdialog_dbus=$(kdialog --title "winesapOS First-Time Setup" --progressbar "Please wait for recommended gaming applications to be installed..." 32 | cut -d" " -f1)
     # AntiMicroX for configuring controller input.
     flatpak_install io.github.antimicrox.antimicrox
-    cp /var/lib/flatpak/app/io.github.antimicrox.antimicrox/current/active/export/share/applications/io.github.antimicrox.antimicrox.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/io.github.antimicrox.antimicrox/current/active/export/share/applications/io.github.antimicrox.antimicrox.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 1
     # Bottles for running any Windows game or application.
     flatpak_install com.usebottles.bottles
-    cp /var/lib/flatpak/app/com.usebottles.bottles/current/active/export/share/applications/com.usebottles.bottles.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/com.usebottles.bottles/current/active/export/share/applications/com.usebottles.bottles.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 2
     # Chiaki for PS4 and PS5 game streaming.
     flatpak_install io.github.streetpea.Chiaki4deck
-    cp /var/lib/flatpak/app/io.github.streetpea.Chiaki4deck/current/active/export/share/applications/io.github.streetpea.Chiaki4deck.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/io.github.streetpea.Chiaki4deck/current/active/export/share/applications/io.github.streetpea.Chiaki4deck.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 3
     # ckb-next.
     aur_install ckb-next
-    cp /usr/share/applications/ckb-next.desktop /home/"${USER}"/Desktop/
+    ln -s /usr/share/applications/ckb-next.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 4
     # Decky Loader.
     decky_loader_install
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 5
     # Discord for social gaming.
     flatpak_install com.discordapp.Discord
-    cp /var/lib/flatpak/app/com.discordapp.Discord/current/active/export/share/applications/com.discordapp.Discord.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/com.discordapp.Discord/current/active/export/share/applications/com.discordapp.Discord.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 6
     # EmuDeck.
     EMUDECK_URL=$(curl -s https://api.github.com/repos/EmuDeck/emudeck-electron/releases/latest \
@@ -873,23 +873,23 @@ gaming_auto() {
     aur_install mangohud-git lib32-mangohud-git
     # GOverlay.
     aur_install goverlay-git
-    cp /usr/share/applications/io.github.benjamimgois.goverlay.desktop /home/"${USER}"/Desktop/
+    ln -s /usr/share/applications/io.github.benjamimgois.goverlay.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 9
     # Heroic Games Launcher.
     flatpak_install com.heroicgameslauncher.hgl
-    cp /var/lib/flatpak/app/com.heroicgameslauncher.hgl/current/active/export/share/applications/com.heroicgameslauncher.hgl.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/com.heroicgameslauncher.hgl/current/active/export/share/applications/com.heroicgameslauncher.hgl.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 10
     # LACT for overclocking and/or undervolting the GPU.
     flatpak_install io.github.ilya_zlobintsev.LACT
-    cp /var/lib/flatpak/app/io.github.ilya_zlobintsev.LACT/current/active/export/share/applications/io.github.ilya_zlobintsev.LACT.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/io.github.ilya_zlobintsev.LACT/current/active/export/share/applications/io.github.ilya_zlobintsev.LACT.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 11
     # Ludusavi.
     aur_install ludusavi
-    cp /usr/share/applications/com.mtkennerly.ludusavi.desktop /home/"${USER}"/Desktop/
+    ln -s /usr/share/applications/com.mtkennerly.ludusavi.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 12
     # Lutris.
     flatpak_install net.lutris.Lutris
-    cp /var/lib/flatpak/app/net.lutris.Lutris/current/active/export/share/applications/net.lutris.Lutris.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/net.lutris.Lutris/current/active/export/share/applications/net.lutris.Lutris.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 13
     # Flatpak's non-interactive mode does not work for MangoHud.
     # Instead, install a specific version of MangoHud.
@@ -898,12 +898,12 @@ gaming_auto() {
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 14
     # Moonlight and Sunshine.
     flatpak_install com.moonlight_stream.Moonlight dev.lizardbyte.app.Sunshine
-    cp /var/lib/flatpak/app/com.moonlight_stream.Moonlight/current/active/export/share/applications/com.moonlight_stream.Moonlight.desktop /home/"${USER}"/Desktop/
-    cp /var/lib/flatpak/app/dev.lizardbyte.app.Sunshine/current/active/export/share/applications/dev.lizardbyte.app.Sunshine.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/com.moonlight_stream.Moonlight/current/active/export/share/applications/com.moonlight_stream.Moonlight.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/dev.lizardbyte.app.Sunshine/current/active/export/share/applications/dev.lizardbyte.app.Sunshine.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 15
     # Nexus Mods app.
     aur_install nexusmods-app-bin
-    cp /usr/share/applications/com.nexusmods.app.desktop /home/"${USER}"/Desktop/
+    ln -s /usr/share/applications/com.nexusmods.app.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 16
     # NonSteamLaunchers.
     curl --location --remote-name "https://raw.githubusercontent.com/moraroy/NonSteamLaunchers-On-Steam-Deck/refs/heads/main/NonSteamLaunchers.desktop" --output-dir /home/"${USER}"/Desktop/
@@ -914,18 +914,18 @@ gaming_auto() {
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 17
     # Oversteer for managing racing wheels.
     flatpak_install io.github.berarma.Oversteer
-    cp /var/lib/flatpak/app/io.github.berarma.Oversteer/current/active/export/share/applications/io.github.berarma.Oversteer.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/io.github.berarma.Oversteer/current/active/export/share/applications/io.github.berarma.Oversteer.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 18
     # Playtron GameLAB.
     curl --location "https://api.playtron.one/api/v1/gamelab/download/linux_x64_appimage/latest" --output /home/"${USER}"/Desktop/GameLAB.AppImage
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 19
     # Polychromatic.
     aur_install polychromatic
-    cp /usr/share/applications/polychromatic.desktop /home/"${USER}"/Desktop/
+    ln -s /usr/share/applications/polychromatic.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 20
     # Prism Launcher for playing Minecraft.
     flatpak_install org.prismlauncher.PrismLauncher
-    cp /var/lib/flatpak/app/org.prismlauncher.PrismLauncher/current/active/export/share/applications/org.prismlauncher.PrismLauncher.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/org.prismlauncher.PrismLauncher/current/active/export/share/applications/org.prismlauncher.PrismLauncher.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 21
     # Proton-GE.
     proton_ge_install
@@ -940,15 +940,15 @@ flatpak run com.github.Matoking.protontricks $@
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 23
     # ProtonUp-Qt for managing GE-Proton versions.
     flatpak_install net.davidotek.pupgui2
-    cp /var/lib/flatpak/app/net.davidotek.pupgui2/current/active/export/share/applications/net.davidotek.pupgui2.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/net.davidotek.pupgui2/current/active/export/share/applications/net.davidotek.pupgui2.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 24
     # OBS Studio for screen recording and live streaming.
     flatpak_install com.obsproject.Studio
-    cp /var/lib/flatpak/app/com.obsproject.Studio/current/active/export/share/applications/com.obsproject.Studio.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/com.obsproject.Studio/current/active/export/share/applications/com.obsproject.Studio.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 25
     # Steam.
     pacman_install steam
-    cp /usr/share/applications/steam.desktop /home/"${USER}"/Desktop/
+    ln -s /usr/share/applications/steam.desktop /home/"${USER}"/Desktop/
     steam_bootstrap
     # 'gamescope-ogc' needs to be installed first before 'gamescope-session-steam-git' and 'opengamepadui-session-git'.
     # Otherwise, the 'gamescope' package gets installed in as a dependency.
@@ -959,7 +959,7 @@ flatpak run com.github.Matoking.protontricks $@
     aur_install remoteplaywhatever
     # RetroDECK.
     flatpak_install net.retrodeck.retrodeck
-    cp /var/lib/flatpak/app/net.retrodeck.retrodeck/current/active/export/share/applications/net.retrodeck.retrodeck.desktop /home/"${USER}"/Desktop/
+    ln -s /var/lib/flatpak/app/net.retrodeck.retrodeck/current/active/export/share/applications/net.retrodeck.retrodeck.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 27
     # Open Gamepad UI.
     aur_install opengamepadui-bin opengamepadui-session-git
@@ -977,7 +977,7 @@ flatpak run com.github.Matoking.protontricks $@
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 31
     # ZeroTier.
     zerotier_install
-    cp /usr/share/applications/zerotier-gui.desktop /home/"${USER}"/Desktop/
+    ln -s /usr/share/applications/zerotier-gui.desktop /home/"${USER}"/Desktop/
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog org.kde.kdialog.ProgressDialog.close
 }
 

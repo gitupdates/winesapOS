@@ -9,6 +9,7 @@
 - Change USB driver to no longer autosuspend.
 - Add the default user to the 'wheel' group for more administrator control.
 - Add GameImage for creating portable games.
+- Change desktop shortcuts to be symlinks instead of copied.
 
 ## 4.5.0 - The Ventoy Resize Update
 
