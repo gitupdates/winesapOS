@@ -770,6 +770,13 @@ if [[ "${WINESAPOS_BUILD_CHROOT_ONLY}" == "false" ]]; then
             winesapos_test_failure
         fi
 
+        printf "\tChecking that GRUB has the command line argument to disable USB autosuspend..."
+        if grep -q "usbcore.autosuspend=-1" "${WINESAPOS_INSTALL_DIR}"/boot/grub/grub.cfg; then
+            echo PASS
+        else
+            winesapos_test_failure
+        fi
+
         printf "\tChecking that GRUB will use partition UUIDs instead of Linux UUIDs..."
         if grep -q -P "^GRUB_DISABLE_LINUX_UUID=true" "${WINESAPOS_INSTALL_DIR}"/etc/default/grub; then
             if grep -q -P "^GRUB_DISABLE_LINUX_PARTUUID=true" "${WINESAPOS_INSTALL_DIR}"/etc/default/grub; then
