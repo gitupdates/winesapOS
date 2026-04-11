@@ -964,6 +964,9 @@ if [[ "${WINESAPOS_INSTALL_GAMING_TOOLS}" == "true" ]]; then
     echo "Installing gaming tools..."
     # ckb-next.
     pacman_install_chroot ckb-next
+    # GameImage
+    curl --location "https://github.com/gameimage/gameimage/releases/latest/download/gameimage.flatimage" --output "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/gameimage.flatimage
+    chmod +x "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/gameimage.flatimage
     # GameMode.
     pacman_install_chroot gamemode lib32-gamemode
     # 'gamescope-ogc' needs to be installed first before 'gamescope-session-steam-git' and 'opengamepadui-session-git'.

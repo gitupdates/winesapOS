@@ -174,6 +174,7 @@ Want to help support our work? Report any bugs or feature requests to our [GitHu
     - [Chiaki](https://github.com/streetpea/chiaki-ng) for PS4 and PS5 game streaming.
     - [ckb-next](https://github.com/ckb-next/ckb-next) for supporting RGB on Corsair keyboards and mice.
     - [DOSBox](https://www.dosbox.com/) for running 16-bit DOS and Windows (via Wine) applications.
+    - [GameImage](https://github.com/gameimage/gameimage) for creating portables games.
     - [GameMode](https://github.com/FeralInteractive/gamemode) is available to be used to speed up games.
     - [Gamescope](https://github.com/OpenGamingCollective/gamescope) from the Open Gaming Collective (OGC) for helping play older games with frame rate or resolution issues.
     - [GOverlay](https://github.com/benjamimgois/goverlay) is a GUI for managing Vulkan overlays including MangoHud and vkBasalt.
