@@ -10,6 +10,7 @@
 - Add the default user to the 'wheel' group for more administrator control.
 - Add GameImage for creating portable games.
 - Change desktop shortcuts to be symlinks instead of copied.
+- Add CDEmu for virtualizing disc drives.
 
 ## 4.5.0 - The Ventoy Resize Update
 

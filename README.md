@@ -123,6 +123,7 @@ Want to help support our work? Report any bugs or feature requests to our [GitHu
     - [Blueman](https://github.com/blueman-project/blueman) for a Bluetooth pairing client.
     - [Bottles](https://usebottles.com/) for installing any Windows program.
     - [Calibre](https://calibre-ebook.com/) for managing ebooks.
+    - [CDEmu](https://cdemu.sourceforge.io/) for virtualizing disc drives.
     - [CoolerControl](https://gitlab.com/coolercontrol/coolercontrol) for managing computer fans.
     - [Discord](https://discord.com/) for a gaming chat client.
     - [Discover](https://apps.kde.org/discover/) for a GUI Flatpak package manager.

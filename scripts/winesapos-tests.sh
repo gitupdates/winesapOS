@@ -1034,6 +1034,13 @@ fi
 echo "Testing that the machine-id was reset complete."
 
 if [[ "${WINESAPOS_INSTALL_PRODUCTIVITY_TOOLS}" == "true" ]]; then
+    printf "Checking that the 'vhba' driver will load automatically..."
+    if grep -q "vhba" "${WINESAPOS_INSTALL_DIR}"/usr/lib/modules-load.d/winesapos-cdemu.conf; then
+        echo PASS
+    else
+        winesapos_test_failure
+    fi
+
     echo "Testing that the offline ClamAV databases were downloaded..."
     for i in bytecode daily main; do
         printf "\t%s..." "${i}"
@@ -1122,6 +1129,7 @@ pacman_search_loop \
 
 if [[ "${WINESAPOS_INSTALL_PRODUCTIVITY_TOOLS}" == "true" ]]; then
     pacman_search_loop \
+      cdemu-client \
       clamav \
       distrobox \
       jre21-openjdk \

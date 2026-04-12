@@ -598,8 +598,15 @@ chmod +x "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/balena
 echo "Installing balenaEtcher complete."
 
 if [[ "${WINESAPOS_INSTALL_PRODUCTIVITY_TOOLS}" == "true" ]]; then
-    echo "Installing additional packages..."
+    echo "Installing productivity tools..."
     pacman_install_chroot bind cpio emacs ffmpeg jre21-openjdk libdvdcss lm_sensors man-db nano ncdu nmap openssh plocate python python-pip python-setuptools p7zip rsync smartmontools sudo terminator tmate tmux unzip wget veracrypt vi vim zip zstd
+
+    # CDEmu.
+    pacman_install_chroot cdemu-client cdemu-daemon vhba-module-dkms
+    echo "sg
+sr_mod
+vhba" >> "${WINESAPOS_INSTALL_DIR}"/usr/lib/modules-load.d/winesapos-cdemu.conf
+
     # ClamAV anti-virus.
     pacman_install_chroot clamav clamtk
     ## Download an offline database for ClamAV.
@@ -610,12 +617,11 @@ if [[ "${WINESAPOS_INSTALL_PRODUCTIVITY_TOOLS}" == "true" ]]; then
 
     # mpv for HDR video playback.
     pacman_install_chroot mpv
+    echo "Installing productivity tools complete."
 
-    echo "Installing additional packages complete."
-
-    echo "Installing additional packages from the AUR..."
+    echo "Installing additional productivity tools from the AUR..."
     aur_install_chroot coolercontrol qdirstat
-    echo "Installing additional packages from the AUR complete."
+    echo "Installing additional productivity tools from the AUR complete."
 
 else
     pacman_install_chroot bind cpio emacs lm_sensors man-db nano openssh p7zip rsync sudo terminator tmate tmux unzip wget vi vim zip zstd

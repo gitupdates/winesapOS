@@ -102,6 +102,14 @@ nix_install() {
     nix-channel --update
 }
 
+cdemu_install() {
+    pacman_install cdemu-client cdemu-daemon vhba-module-dkms
+    sudo touch /usr/lib/modules-load.d/winesapos-cdemu.conf
+    echo "sg
+sr_mod
+vhba" | sudo tee /usr/lib/modules-load.d/winesapos-cdemu.conf
+}
+
 chrome_install() {
     if ! flatpak list | grep -q com.google.Chrome; then
         flatpak_install com.google.Chrome
@@ -710,7 +718,7 @@ desktops_ask() {
 }
 
 productivity_auto() {
-    kdialog_dbus=$(kdialog --title "winesapOS First-Time Setup" --progressbar "Please wait for recommended productivity applications to be installed..." 19 | cut -d" " -f1)
+    kdialog_dbus=$(kdialog --title "winesapOS First-Time Setup" --progressbar "Please wait for recommended productivity applications to be installed..." 20 | cut -d" " -f1)
     # Calibre for an ebook manager.
     flatpak_install com.calibre_ebook.calibre
     ln -s /var/lib/flatpak/app/com.calibre_ebook.calibre/current/active/export/share/applications/com.calibre_ebook.calibre.desktop /home/"${USER}"/Desktop/
@@ -785,12 +793,16 @@ productivity_auto() {
     # VLC media player.
     flatpak_install org.videolan.VLC
     ln -s /var/lib/flatpak/app/org.videolan.VLC/current/active/export/share/applications/org.videolan.VLC.desktop /home/"${USER}"/Desktop/
+    "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 19
+    # CDEmu.
+    cdemu_install
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog org.kde.kdialog.ProgressDialog.close
 }
 
 productivity_ask() {
     prodpkgs=$(kdialog --title "winesapOS First-Time Setup" --separate-output --checklist "Select productivity packages to install:" \
                        com.calibre_ebook.calibre:flatpak "Calibre (ebooks)" off \
+                       cdemu:other "CDEmu (virtual disc drive)" off \
                        com.gitlab.davem.ClamTk:flatpak "ClamTk (anti-virus)" off \
                        coolercontrol:pkg "CoolerControl (fan control)" off \
                        org.filezillaproject.Filezilla:flatpak "FileZilla (FTP)" off \
@@ -819,6 +831,10 @@ productivity_ask() {
 
         if echo "${prodpkg}" | grep -P ":pkg$"; then
             aur_install "$(echo "${prodpkg}" | cut -d: -f1)"
+        fi
+
+        if echo "${prodpkg}" | grep -P "^cdemu:other$"; then
+            cdemu_install
         fi
 
         if echo "${gamepkg}" | grep -P "^homebrew:other$"; then
