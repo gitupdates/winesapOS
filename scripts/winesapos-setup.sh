@@ -837,11 +837,11 @@ productivity_ask() {
             cdemu_install
         fi
 
-        if echo "${gamepkg}" | grep -P "^homebrew:other$"; then
+        if echo "${prodpkg}" | grep -P "^homebrew:other$"; then
             homebrew_install
         fi
 
-        if echo "${gamepkg}" | grep -P "^nix:other$"; then
+        if echo "${prodpkg}" | grep -P "^nix:other$"; then
             nix_install
         fi
 
