@@ -1109,7 +1109,6 @@ pacman_search_loop \
     appimagelauncher \
     appimagepool-appimage \
     aw87559-firmware \
-    ayaneo-platform-dkms-git \
     bauh \
     bmi260-dkms \
     cloud-guest-utils \

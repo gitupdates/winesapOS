@@ -140,8 +140,6 @@ git config --global user.name "Your Name"
 
 cd "${WORK_DIR}"
 makepkg_fn apfsprogs-git
-makepkg_fn ayaneo-platform-dkms-git
-makepkg_fn ayaled-updated
 makepkg_fn bmi260-dkms
 makepkg_fn ceph-bin
 makepkg_fn curl-static-bin

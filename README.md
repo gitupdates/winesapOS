@@ -305,7 +305,7 @@ We provide support for both the original ASUS ROG Ally and the newer ASUS ROG Al
 
 | Hardware | Supported | Third-Party Driver(s) |
 | -------- | --------- | --------- |
-| Controller | Yes | [ayaneo-platform-dkms-git](https://github.com/ShadowBlip/ayaneo-platform) and [ayaled-updated](https://github.com/luluco250/ayaled) |
+| Controller | Yes | |
 | NVMe | Yes | |
 | Sound | Yes | [aw87559-firmware](https://aur.archlinux.org/packages/aw87559-firmware) |
 | Fans | Yes | |

@@ -813,9 +813,6 @@ pacman_install_chroot libimobiledevice usbmuxd
 rm -f "${WINESAPOS_INSTALL_DIR}"/usr/lib/udev/rules.d/39-usbmuxd.rules
 curl --location "https://raw.githubusercontent.com/libimobiledevice/usbmuxd/master/udev/39-usbmuxd.rules.in" --output "${WINESAPOS_INSTALL_DIR}"/usr/lib/udev/rules.d/39-usbmuxd.rules
 
-# AYANEO LED controls.
-aur_install_chroot ayaneo-platform-dkms-git ayaled-updated
-
 # Improved gyro support for controllers and handheld PCs.
 aur_install_chroot bmi260-dkms
 
