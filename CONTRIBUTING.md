@@ -757,6 +757,12 @@ These are tasks that need to happen before publishing a stable release.
     - [curl-static-bin](https://aur.archlinux.org/packages/curl-static-bin)
     - [pifs-aya-git](https://aur.archlinux.org/packages/pifs-aya-git)
     - [linux-firmware-valve](https://aur.archlinux.org/packages/linux-firmware-valve)
+- Verify that CI is showing a successful green status for all of these sections:
+    - [winesapOS Repository](README.md#winesapos-repository)
+    - [Custom Builds](README.md#custom-builds)
+    - [Minor Upgrades](README.md#minor-upgrades)
+    - [Major Upgrades](README.md#major-upgrades)
+    - [Convert to winesapOS](README.md#convert-to-winesapos)
 - Delete old git branches:
 
     ```
