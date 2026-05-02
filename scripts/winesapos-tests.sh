@@ -357,7 +357,7 @@ if [[ "${WINESAPOS_INSTALL_GAMING_TOOLS}" == "true" ]]; then
       ckb-next \
       gamemode \
       lib32-gamemode \
-      gamescope-ogc \
+      gamescope-ogc-git \
       gamescope-session-git \
       gamescope-session-steam-git \
       goverlay-git \

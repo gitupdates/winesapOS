@@ -963,9 +963,9 @@ flatpak run com.github.Matoking.protontricks $@
     pacman_install steam
     ln -s /usr/share/applications/steam.desktop /home/"${USER}"/Desktop/
     steam_bootstrap
-    # 'gamescope-ogc' needs to be installed first before 'gamescope-session-steam-git' and 'opengamepadui-session-git'.
+    # 'gamescope-ogc-git' needs to be installed first before 'gamescope-session-steam-git' and 'opengamepadui-session-git'.
     # Otherwise, the 'gamescope' package gets installed in as a dependency.
-    aur_install gamescope-ogc
+    aur_install gamescope-ogc-git
     aur_install gamescope-session-git gamescope-session-steam-git
     "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog Set org.kde.kdialog.ProgressDialog value 25
     # RemotePlayWhatever.
@@ -1064,7 +1064,7 @@ gaming_ask() {
         fi
 
         if echo "${gamepkg}" | grep -P "^gamescope:other$"; then
-            aur_install gamescope-ogc gamescope-session-git gamescope-session-steam-git
+            aur_install gamescope-ogc-git gamescope-session-git gamescope-session-steam-git
         fi
 
         if echo "${gamepkg}" | grep -P "^mangohud-git:other$"; then
@@ -1082,7 +1082,7 @@ gaming_ask() {
         fi
 
         if echo "${gamepkg}" | grep -P "^opengamepadui:other$"; then
-            aur_install opengamepadui-bin opengamepadui-session-git
+            aur_install gamescope-ogc-git opengamepadui-bin opengamepadui-session-git
         fi
 
         if echo "${gamepkg}" | grep -P "^proton-ge:other$"; then

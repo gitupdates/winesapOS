@@ -104,9 +104,9 @@ Include = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
     curl --location "https://github.com/balena-io/etcher/releases/download/v${ETCHER_VER}/balenaEtcher-${ETCHER_VER}-x64.AppImage" --output "${HOME}"/Desktop/balenaEtcher.AppImage
     chmod +x "${HOME}"/Desktop/balenaEtcher.AppImage
 
-    # 'gamescope-ogc' needs to be installed first.
+    # 'gamescope-ogc-git' needs to be installed first.
     # Otherwise, the 'gamescope' package gets installed in as a dependency of other packages.
-    yay --noconfirm -S --needed --removemake gamescope-ogc
+    yay --noconfirm -S --needed --removemake gamescope-ogc-git
     if ! yay --noconfirm -S --needed --removemake \
       appimagepool-appimage \
       apfsprogs-git \

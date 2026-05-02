@@ -145,7 +145,7 @@ makepkg_fn ayaled-updated
 makepkg_fn bmi260-dkms
 makepkg_fn ceph-bin
 makepkg_fn curl-static-bin
-makepkg_fn gamescope-ogc
+makepkg_fn gamescope-ogc-git
 makepkg_fn gfs2-utils
 makepkg_fn linux-apfs-rw-dkms-git
 makepkg_fn linux-firmware-valve

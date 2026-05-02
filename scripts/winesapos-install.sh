@@ -975,13 +975,13 @@ if [[ "${WINESAPOS_INSTALL_GAMING_TOOLS}" == "true" ]]; then
     chmod +x "${WINESAPOS_INSTALL_DIR}"/home/"${WINESAPOS_USER_NAME}"/Desktop/gameimage.flatimage
     # GameMode.
     pacman_install_chroot gamemode lib32-gamemode
-    # 'gamescope-ogc' needs to be installed first before 'gamescope-session-steam-git' and 'opengamepadui-session-git'.
+    # 'gamescope-ogc-git' needs to be installed first before 'gamescope-session-steam-git' and 'opengamepadui-session-git'.
     # Otherwise, the 'gamescope' package gets installed in as a dependency.
-    aur_install_chroot gamescope-ogc
+    aur_install_chroot gamescope-ogc-git
     # Open Gamepad UI.
     aur_install_chroot opengamepadui-bin
     # Gamescope and Gamescope Session.
-    aur_install_chroot gamescope-ogc gamescope-session-git gamescope-session-steam-git opengamepadui-session-git
+    aur_install_chroot gamescope-session-git gamescope-session-steam-git opengamepadui-session-git
     # Nexus Mods app.
     aur_install_chroot nexusmods-app-bin
     # OpenRazer.
