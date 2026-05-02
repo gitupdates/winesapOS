@@ -94,7 +94,7 @@ homebrew_install() {
 }
 
 nix_install() {
-    curl -L https://install.determinate.systems/nix | sudo sh -s -- install --no-confirm
+    pacman_install nix
     sudo systemctl enable --now nix-daemon
     # shellcheck disable=SC1091
     . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
