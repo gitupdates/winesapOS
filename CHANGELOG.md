@@ -1,6 +1,6 @@
 # Change Log
 
-## 4.6.0 - The Playtron Update
+## 4.6.0 - The Open Gaming Collective Update
 
 - Remove the abandoned Steam Tinker Launch program.
 - Change Linux LTS to be based on Linux 6.18.
@@ -11,6 +11,7 @@
 - Add GameImage for creating portable games.
 - Change desktop shortcuts to be symlinks instead of copied.
 - Add CDEmu for virtualizing disc drives.
+- Remove Playtron GameLAB.
 
 ## 4.5.0 - The Ventoy Resize Update
 

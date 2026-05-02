@@ -185,7 +185,6 @@ Want to help support our work? Report any bugs or feature requests to our [GitHu
     - [Moonlight](https://github.com/moonlight-stream/moonlight-qt) and [Sunshine](https://github.com/LizardByte/Sunshine) for game streaming.
     - [Nexus Mods app](https://github.com/Nexus-Mods/NexusMods.App) for managing mods.
     - [NonSteamLaunchers](https://github.com/moraroy/NonSteamLaunchers-On-Steam-Deck) to manage other game launchers.
-    - [Playtron GameLAB](https://www.playtron.one/contribute) to remotely manage Playtron GameOS devices.
     - [ProtonUp-Qt](https://github.com/DavidoTek/ProtonUp-Qt) for managing Steam Play compatibility tools.
     - [RemotePlayWhatever](https://github.com/m4dEngi/RemotePlayWhatever) for streaming non-Steam games with Steam Remote Play.
     - [RetroDECK](https://retrodeck.net/) for supporting various emulators.
@@ -379,15 +378,7 @@ Both the Steam Deck LCD and OLED models are fully supported.
 
 ### Community Collaboration
 
-We are actively working alongside these operating system projects to help provide wider Linux gaming support to the masses:
-
-- [Batocera](https://batocera.org/)
-- [ChimeraOS](https://chimeraos.org/)
-- [Garuda Linux](https://garudalinux.org/)
-- [SteamOS: Edge](https://gitlab.com/edgedev1/steamos-edge) (Originally GuestSneezeOS, then Jupiter Linux.)
-- [Nobara](https://nobaraproject.org/)
-- [Playtron GameOS](https://www.playtron.one/)
-- [Universal Blue](https://universal-blue.org/)
+We are a proud member of the [Open Gaming Collective (OGC)](https://opengamingcollective.org/). Our goal is to provide a unified gaming experience across various different Linux distributions.
 
 ### winesapOS Repository
 
@@ -1366,7 +1357,6 @@ Here are community contributors who have helped the winesapOS project.
 
 - Companies:
     - [Intel](https://www.intel.com/) = Intel Optane drives for builds
-    - [Playtron](https://www.playtron.one/) = PC hardware for testing
 - Individuals:
     - Mark Dougherty = Patreon
     - Mike Artz = Patreon
