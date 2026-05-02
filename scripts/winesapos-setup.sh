@@ -620,6 +620,7 @@ blacklist i2c_nvidia_gpu" | sudo tee /etc/modprobe.d/winesapos-nvidia.conf
 swap_method_auto() {
     kdialog_dbus=$(kdialog --title "winesapOS First-Time Setup" --progressbar "Please wait for zram to be enabled..." 1 | cut -d" " -f1)
     # Configure optimized zram settings based on our own research and testing.
+    # https://rootpages.lukeshort.cloud/storage/file_systems.html#zram
     echo "vm.swappiness = 180
 vm.watermark_boost_factor = 0
 vm.watermark_scale_factor = 125
@@ -632,9 +633,20 @@ compression-algorithm = lz4" | sudo tee /etc/systemd/zram-generator.conf
 }
 
 swap_method_ask() {
-    swap_selected=$(kdialog --title "winesapOS First-Time Setup" --menu "Select your method for swap..." zram "zram (fast to create, does not enable hibernation, uses CPU)" swapfile "swapfile (slow to create, enables hibernation, uses I/O)" none "none")
-    if [[ "${swap_selected}" == "zram" ]]; then
+    swap_selected=$(kdialog --title "winesapOS First-Time Setup" --menu "Select your method for swap..." zram-fast "zram (fast to create, compression is 2x RAM and fast,  does not enable hibernation, uses CPU)" zram-big "zram (fast to create, compression is 3x RAM and slow, does not enable hibernation, uses CPU)"  swapfile "swapfile (slow to create, enables hibernation, uses I/O)" none "none")
+    if [[ "${swap_selected}" == "zram-fast" ]]; then
         swap_method_auto
+    elif [[ "${swap_selected}" == "zram-big" ]]; then
+        # Configure optimized zram settings based on our own research and testing.
+        # https://rootpages.lukeshort.cloud/storage/file_systems.html#zram
+        echo "vm.swappiness = 180
+vm.watermark_boost_factor = 0
+vm.watermark_scale_factor = 125
+vm.page-cluster = 0" | sudo tee /etc/sysctl.d/99-vm-zram-parameters.conf
+        echo "[zram0]
+zram-size = ram * 3
+compression-algorithm = zstd" | sudo tee /etc/systemd/zram-generator.conf
+        sudo systemctl daemon-reload && sudo systemctl enable systemd-zram-setup@zram0.service
     elif [[ "${swap_selected}" == "swapfile" ]]; then
         kdialog_dbus=$(kdialog --title "winesapOS First-Time Setup" --progressbar "Please wait for the swapfile to be enabled..." 1 | cut -d" " -f1)
         # shellcheck disable=SC1083 disable=SC2003 disable=SC2046
