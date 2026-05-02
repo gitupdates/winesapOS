@@ -755,6 +755,7 @@ As of winesapOS 4.2.0, [Ventoy](https://www.ventoy.net/en/index.html) is support
     # This is usually either "4" (minimal image) or "5" (performance and secure images).
     $ sudo growpart /dev/loop0 <PARTITION_NUMBER>
     $ sudo losetup --detach /dev/loop0
+    $ sync
     ```
 3. Copy the `winesapos.vtoy` image to the Ventoy drive.
 
