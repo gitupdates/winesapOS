@@ -1298,6 +1298,12 @@ else
     firmware_upgrade_auto
 fi
 
+# Configure a unique hostname.
+new_hostname="winesapos-$(uuidgen | cut -d- -f1)"
+echo "${new_hostname}" | sudo tee /etc/hostname
+sudo sed -i "s#winesapos#${new_hostname}#g" /etc/hosts
+sudo hostnamectl set-hostname "${new_hostname}"
+
 # Fix permissions.
 chmod +x /home/"${USER}"/Desktop/*.AppImage
 sudo chown 1000:1000 /home/"${USER}"/Desktop/*.desktop

@@ -1205,6 +1205,13 @@ if ! grep wheel: /etc/group | grep -q "${WINESAPOS_USER_NAME}"; then
     groupadd wheel
     usermod -a -G wheel "${WINESAPOS_USER_NAME}"
 fi
+
+if [[ "$(cat /etc/hostname)" == "winesapos" ]]; then
+    new_hostname="winesapos-$(uuidgen | cut -d- -f1)"
+    echo "${new_hostname}" | tee /etc/hostname
+    sed -i "s#winesapos#${new_hostname}#g" /etc/hosts
+    hostnamectl set-hostname "${new_hostname}"
+fi
 sudo -E -u "${WINESAPOS_USER_NAME}" "${qdbus_cmd}" "${kdialog_dbus}" /ProgressDialog org.kde.kdialog.ProgressDialog.close
 echo "Running 4.5.0 to 4.6.0 upgrades complete."
 

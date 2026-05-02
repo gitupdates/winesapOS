@@ -12,6 +12,7 @@
 - Change desktop shortcuts to be symlinks instead of copied.
 - Add CDEmu for virtualizing disc drives.
 - Remove Playtron GameLAB.
+- Change hostname to be unique.
 
 ## 4.5.0 - The Ventoy Resize Update
 
